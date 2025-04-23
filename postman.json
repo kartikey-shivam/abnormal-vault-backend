@@ -1,0 +1,250 @@
+{
+    "info": {
+        "name": "Abnormal File Vault",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Get CSRF Token",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "http://localhost:8000/api/auth/csrf/"
+                    }
+                },
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "X-CSRFToken",
+                                "value": "{{csrftoken}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n\t\"username\": \"testuser\",\n\t\"email\": \"test@example.com\",\n\t\"password\": \"testpassword123\"\n}"
+                        },
+                        "url": "http://localhost:8000/api/auth/register/"
+                    }
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "X-CSRFToken",
+                                "value": "{{csrftoken}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n\t\"username\": \"testuser\",\n\t\"password\": \"testpassword123\"\n}"
+                        },
+                        "url": "http://localhost:8000/api/auth/login/"
+                    }
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "X-CSRFToken",
+                                "value": "{{csrftoken}}"
+                            }
+                        ],
+                        "url": "http://localhost:8000/api/auth/logout/"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "File Operations",
+            "item": [
+                {
+                    "name": "Upload File",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "X-CSRFToken",
+                                "value": "{{csrftoken}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "file",
+                                    "type": "file",
+                                    "src": "/path/to/example.txt"
+                                }
+                            ]
+                        },
+                        "url": "http://localhost:8000/api/files/"
+                    }
+                },
+                {
+                    "name": "List All Files",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8000/api/files/"
+                    }
+                },
+                {
+                    "name": "Get File Details",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8000/api/files/1/"
+                    }
+                },
+                {
+                    "name": "Star File",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "X-CSRFToken",
+                                "value": "{{csrftoken}}"
+                            }
+                        ],
+                        "url": "http://localhost:8000/api/files/1/star/"
+                    }
+                },
+                {
+                    "name": "Download File",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8000/api/files/1/download/"
+                    }
+                },
+                {
+                    "name": "Recent Files",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8000/api/files/recent/"
+                    }
+                },
+                {
+                    "name": "Starred Files",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8000/api/files/starred/"
+                    }
+                },
+                {
+                    "name": "Search Files",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/api/files/?name=test&content_type=text/plain&date_from=2024-01-01&date_to=2024-12-31",
+                            "query": [
+                                {
+                                    "key": "name",
+                                    "value": "test"
+                                },
+                                {
+                                    "key": "content_type",
+                                    "value": "text/plain"
+                                },
+                                {
+                                    "key": "date_from",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "date_to",
+                                    "value": "2024-12-31"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Check Duplicate",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "X-CSRFToken",
+                                "value": "{{csrftoken}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "file",
+                                    "type": "file",
+                                    "src": "/path/to/check_file.txt"
+                                }
+                            ]
+                        },
+                        "url": "http://localhost:8000/api/files/check-duplicate/"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Storage",
+            "item": [
+                {
+                    "name": "Get Storage Usage",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8000/api/storage/usage/"
+                    }
+                },
+                {
+                    "name": "Get Storage Quota",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:8000/api/storage/quota/"
+                    }
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "csrf",
+        "csrf": [
+            {
+                "key": "csrftoken",
+                "value": "{{csrftoken}}",
+                "type": "string"
+            }
+        ]
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    "pm.sendRequest({",
+                    "    url: 'http://localhost:8000/api/auth/csrf/',",
+                    "    method: 'GET'",
+                    "}, function (error, response) {",
+                    "    if (!error) {",
+                    "        var jsonData = response.json();",
+                    "        pm.environment.set('csrftoken', jsonData.csrfToken);",
+                    "    }",
+                    "});"
+                ]
+            }
+        }
+    ]
+}

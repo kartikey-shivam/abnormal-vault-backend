@@ -1,0 +1,44 @@
+Authentication:
+POST /api/auth/login
+POST /api/auth/register
+POST /api/auth/logout
+
+
+
+File Management:
+GET /api/files - List all files with pagination and filters
+POST /api/files/upload - Upload new files with deduplication check
+GET /api/files/:id - Get file details
+PUT /api/files/:id - Update file metadata
+DELETE /api/files/:id - Move file to trash
+POST /api/files/:id/restore - Restore file from trash
+DELETE /api/files/:id/permanent - Permanently delete file
+
+
+File Operations:
+POST /api/files/:id/star - Toggle star status
+POST /api/files/:id/share - Generate sharing link
+POST /api/files/check-duplicate - Check if file exists (hash-based)
+GET /api/files/:id/download - Download file
+
+
+Folders:
+GET /api/folders - List all folders
+POST /api/folders - Create new folder
+PUT /api/folders/:id - Update folder
+DELETE /api/folders/:id - Delete folder
+GET /api/folders/:id/files - List files in folder
+
+
+
+Search & Filters:
+GET /api/search - Search files and folders
+GET /api/files/recent - Get recently modified files
+GET /api/files/starred - Get starred files
+GET /api/files/shared - Get shared files
+GET /api/files/trash - Get files in trash
+
+
+Storage:
+GET /api/storage/usage - Get storage usage statistics
+GET /api/storage/quota - Get storage quota information
